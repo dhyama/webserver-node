@@ -26,3 +26,4 @@ heroku login                            -> Esto solo es necesario una vez en cad
 heroku git:remote -a dhyama-webpage     -> desplegamos repositorio de git a Heroku
 git push heroku master                  -> Subimos nuestro repositorio de git a Heroku
 heroku open                             -> Abrimos en el navegador la aplicación desplegada en Heroku
+heroku git:clone -a dhyama-webpage      -> Comando con el que podermos obtener el código del proyecto subido en formato git (Heroku es un repositorio git tambien)
