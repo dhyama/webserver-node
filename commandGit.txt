@@ -19,3 +19,10 @@ git tag									-> Comprobar la versión en la que nos encontramos.
 git push --tags							-> Subimos los tags de la release que hemos generado a Git
 
 - En la web de github del proyecto en la parte de code->release podemos encontrar los tags, lo podemos editar y dar formato para publicarlo.
+
+Publicar en Heroku
+============================
+heroku login                            -> Esto solo es necesario una vez en cada máquina
+heroku git:remote -a dhyama-webpage     -> desplegamos repositorio de git a Heroku
+git push heroku master                  -> Subimos nuestro repositorio de git a Heroku
+heroku open                             -> Abrimos en el navegador la aplicación desplegada en Heroku
