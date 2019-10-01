@@ -15,11 +15,15 @@ const express = require('express');
 //Ejecutamos la función de expres que nos genera el servicio en app
 const app = express();
 
+//Importamos la libreria HBS
+const hbs = require('hbs');
+
 //Middelware para servir contenido estatico por defecto en Express
 app.use(express.static(__dirname + '/public'));
 
 //Incorporamos hbs (handlerbars o moustage) a Express (Documentación -> https://www.npmjs.com/package/hbs)
-app.set('view engine', 'hbs');
+hbs.registerPartials(__dirname + '/views/partials'); //Indicamos el directorio donde se van a encontrar los parciales de hbs
+app.set('view engine', 'hbs'); //Indicamos a Express que el visor por defecto va a ser hbs
 
 //Al generar el middelware anterior puede producirse un conflicto con la configuración por defecto del app.get en '/'
 //Configuramos una peticion get cuanto el path es '/'
@@ -40,6 +44,14 @@ app.set('view engine', 'hbs');
 app.get('/', (req, res) => {
     res.render('home', {
         nombre: 'Miguel Ángel',
+        anyo: new Date().getFullYear()
+    });
+    //Hemos pasado como parametro a la renderizacion un objeto con las variables que utilizamos en hbs para la construcción dinamica de la web
+})
+
+//Configuramos una peticion get cuanto el path es '/data'
+app.get('/about', (req, res) => {
+    res.render('about', {
         anyo: new Date().getFullYear()
     });
     //Hemos pasado como parametro a la renderizacion un objeto con las variables que utilizamos en hbs para la construcción dinamica de la web
