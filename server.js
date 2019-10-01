@@ -20,6 +20,16 @@ const hbs = require('hbs');
 //Importamos nuestro fichero de helpers
 require('./hbs/helpers');
 
+//Para poder subir la web a Heroku debemos poder acceder a una serie de variables de entorno
+//  como puede ser el puerto donde vamos a publicar, para ello creamos 
+const port = process.env.PORT || 3000; //Al ejecutar en local la varible de entorno no existe por lo que la inicializamos a 3000
+//Tambien debemos indicar a Heroku cual es el comando de inicio de la aplicación, para eso en el fichero package.json añadimos
+// "scripts": {
+// "start": "node server.js", 
+// "nodemon" : "nodemon server.js"
+//En consola con el comando npm start se inicializa el comando asignado (node server.js), pero este es un comando especial que el entiende
+//  para ejecutar el nodemon tenemos que poner npm run nodemon
+
 //Middelware para servir contenido estatico por defecto en Express
 app.use(express.static(__dirname + '/public'));
 
@@ -67,6 +77,6 @@ app.get('/about', (req, res) => {
 // })
 
 //Estamos escuchando en el puerto 3000
-app.listen(3000, () => {
-    console.log('Escuchando peticiones en el puerto 3000')
+app.listen(port, () => {
+    console.log(`Escuchando peticiones en el puerto ${port}`);
 })
