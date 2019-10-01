@@ -17,6 +17,8 @@ const app = express();
 
 //Importamos la libreria HBS
 const hbs = require('hbs');
+//Importamos nuestro fichero de helpers
+require('./hbs/helpers');
 
 //Middelware para servir contenido estatico por defecto en Express
 app.use(express.static(__dirname + '/public'));
@@ -24,6 +26,8 @@ app.use(express.static(__dirname + '/public'));
 //Incorporamos hbs (handlerbars o moustage) a Express (Documentación -> https://www.npmjs.com/package/hbs)
 hbs.registerPartials(__dirname + '/views/partials'); //Indicamos el directorio donde se van a encontrar los parciales de hbs
 app.set('view engine', 'hbs'); //Indicamos a Express que el visor por defecto va a ser hbs
+
+
 
 //Al generar el middelware anterior puede producirse un conflicto con la configuración por defecto del app.get en '/'
 //Configuramos una peticion get cuanto el path es '/'
@@ -43,13 +47,13 @@ app.set('view engine', 'hbs'); //Indicamos a Express que el visor por defecto va
 //Configuramos el servicio para renderizar las páginas generadas con hbs
 app.get('/', (req, res) => {
     res.render('home', {
-        nombre: 'Miguel Ángel',
+        nombre: 'miGuel ángel',
         anyo: new Date().getFullYear()
     });
     //Hemos pasado como parametro a la renderizacion un objeto con las variables que utilizamos en hbs para la construcción dinamica de la web
 })
 
-//Configuramos una peticion get cuanto el path es '/data'
+//Configuramos una peticion get cuanto el path es '/about'
 app.get('/about', (req, res) => {
     res.render('about', {
         anyo: new Date().getFullYear()
@@ -57,10 +61,10 @@ app.get('/about', (req, res) => {
     //Hemos pasado como parametro a la renderizacion un objeto con las variables que utilizamos en hbs para la construcción dinamica de la web
 })
 
-//Configuramos una peticion get cuanto el path es '/data'
-app.get('/data', (req, res) => {
-    res.send('Hola data.')
-})
+// //Configuramos una peticion get cuanto el path es '/data'
+// app.get('/data', (req, res) => {
+//     res.send('Hola data.')
+// })
 
 //Estamos escuchando en el puerto 3000
 app.listen(3000, () => {
